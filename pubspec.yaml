@@ -1,0 +1,111 @@
+name: app
+description: Flutter Architecture Blueprints project.
+version: 1.0.0+1
+
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.13.0 <3.0.0'
+  flutter: '>=2.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # For Google and Firebase
+  firebase_core: ^1.12.0
+  firebase_auth: ^3.3.0
+  firebase_crashlytics: ^2.5.2
+  firebase_performance: ^0.7.1+5
+  firebase_remote_config: ^1.0.2
+
+  # For Firebase Cloud Messaging
+  firebase_messaging: ^11.2.11
+  flutter_local_notifications: ^9.4.0
+
+  # For Architecture
+  flutter_hooks: ^0.18.1
+  hooks_riverpod: ^1.0.2
+
+  # For Networking
+  dio: ^4.0.4
+  dio_firebase_performance: ^0.3.0
+  retrofit: ^3.0.0
+  # For User-Agent Client Hints
+  ua_client_hints: ^1.1.0
+
+  # For Model
+  json_serializable: ^6.1.1
+  freezed_annotation: ^1.0.0
+
+  # For save data local
+  shared_preferences: ^2.0.6
+
+  # For DateTime
+  intl: ^0.17.0
+
+  # Convert between Enum and String
+  enum_to_string: ^2.0.1
+
+  # For route
+  auto_route: ^3.2.4
+
+  # For UIs
+  cupertino_icons: ^1.0.4
+  google_fonts: ^2.1.0
+  flutter_svg: ^1.0.0
+  webview_flutter: ^3.0.0
+
+  # For querying information about an application package.
+  package_info_plus: ^1.3.0
+
+  # For launching url
+  url_launcher: ^6.0.17
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^2.1.5
+
+  # For Networking
+  retrofit_generator: ^3.0.0+2
+
+  # For Assets
+  flutter_gen_runner: ^4.1.2
+
+  # For Model
+  freezed: ^1.0.2
+
+  # For Analyzer
+  flutter_lints: ^1.0.4
+
+  # For AutoRoute
+  auto_route_generator: ^3.2.3
+
+  # For Testing
+  mocktail: ^0.2.0
+  mocktail_image_network: ^0.2.0
+
+  # For change package name quickly
+  change_app_package_name: ^1.0.0
+
+flutter_gen:
+  integrations:
+    flutter_svg: true
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/svgs/
+
+  fonts:
+    - family: Rotunda
+      fonts:
+        - asset: assets/fonts/Rotunda-Bold.otf
+          weight: 700
