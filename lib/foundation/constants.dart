@@ -28,14 +28,14 @@ class Constants {
 
   factory Constants._dev() {
     return const Constants._(
-      endpoint: 'https://api.base.com',
+      endpoint: 'https://api.github.com',
       apiKey: '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',
     );
   }
 
   factory Constants._prd() {
     return const Constants._(
-      endpoint: 'https://api.base.com',
+      endpoint: 'https://api.github.com',
       apiKey: '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',
     );
   }
