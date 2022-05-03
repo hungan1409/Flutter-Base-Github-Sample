@@ -23,7 +23,7 @@ class AppDio with DioMixin implements Dio {
     interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
       options.headers.addAll(await userAgentClientHintsHeader());
       // Add header api key of base for authorization
-      options.headers.addAll({"Authorization": "token ${Constants.of().apiKey}"});
+      // options.headers.addAll({"Authorization": "token ${Constants.of().apiKey}"});
       handler.next(options);
     }));
 
