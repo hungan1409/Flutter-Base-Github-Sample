@@ -7,16 +7,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'github_repository.dart';
 
-final githubRepositoryProvider =
-    Provider((ref) => GithubRepositoryImpl(ref.read));
+final githubRepositoryProvider = Provider((ref) => GithubRepositoryImpl(ref));
 
 class GithubRepositoryImpl implements GithubRepository {
-  GithubRepositoryImpl(this._reader);
+  GithubRepositoryImpl(this._ref);
 
-  final Reader _reader;
+  final Ref _ref;
 
-  late final GithubDataSource _dataSource = _reader(githubDataSourceProvider);
-  late final _errorNotifier = _reader(errorProvider);
+  late final GithubDataSource _dataSource = _ref.read(githubDataSourceProvider);
+  late final _errorNotifier = _ref.read(errorProvider);
 
   @override
   Future<Result<User>> getUser(String userId) {

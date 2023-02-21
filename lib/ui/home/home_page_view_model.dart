@@ -8,15 +8,15 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final homeViewModelProvider =
-    ChangeNotifierProvider((ref) => HomeViewModel(ref.read));
+    ChangeNotifierProvider((ref) => HomeViewModel(ref));
 
 class HomeViewModel extends ChangeNotifier {
-  HomeViewModel(this._reader);
+  HomeViewModel(this._ref);
 
-  final Reader _reader;
+  final Ref _ref;
 
-  late final GithubRepository _repository = _reader(githubRepositoryProvider);
-  late final _loadingProvider = _reader(loadingStateProvider);
+  late final GithubRepository _repository = _ref.read(githubRepositoryProvider);
+  late final _loadingProvider = _ref.read(loadingStateProvider);
 
   // For receive information of User
   Result<User>? _user;

@@ -6,8 +6,13 @@ part of 'github_data_source.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+
 class _GithubDataSource implements GithubDataSource {
-  _GithubDataSource(this._dio, {this.baseUrl});
+  _GithubDataSource(
+    this._dio, {
+    this.baseUrl,
+  });
 
   final Dio _dio;
 
@@ -19,29 +24,48 @@ class _GithubDataSource implements GithubDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/users/${id}',
-                queryParameters: queryParameters, data: _data)
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = User.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<List<Repos>> getRepos(
-      {required id, required page, perPage = 25}) async {
+  Future<List<Repos>> getRepos({
+    required id,
+    required page,
+    perPage = 25,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
-      r'per_page': perPage
+      r'per_page': perPage,
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(_setStreamType<List<Repos>>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/users/${id}/repos',
-                queryParameters: queryParameters, data: _data)
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Repos>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users/${id}/repos',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => Repos.fromJson(i as Map<String, dynamic>))
