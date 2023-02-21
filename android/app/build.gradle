@@ -28,7 +28,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     // Workaround for support to multiple CIs (Bitrise and Codemagic).
-    compileSdkVersion System.getenv('ANDROID_SDK_VERSION') ? System.getenv('ANDROID_SDK_VERSION').toInteger() : 31
+    compileSdkVersion System.getenv('ANDROID_SDK_VERSION') ? System.getenv('ANDROID_SDK_VERSION').toInteger() : 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -52,7 +52,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.flutter.base"
         minSdkVersion 22
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

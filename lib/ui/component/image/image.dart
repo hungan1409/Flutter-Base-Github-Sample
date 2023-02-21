@@ -17,7 +17,7 @@ ImageProvider profileImageProvider(String? imageUrl,
     if (imageProviderPlaceholder != null) {
       return imageProviderPlaceholder;
     }
-    return Assets.images.iconPlaceholder;
+    return AssetImage(Assets.images.iconPlaceholder.path);
   }
   return NetworkImage(imageUrl);
 }

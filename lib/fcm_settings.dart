@@ -31,7 +31,7 @@ Future<void> _androidSettings(WidgetRef ref) async {
 
   var initializationSettingsAndroid =
       const AndroidInitializationSettings('@drawable/ic_notification');
-  var initializationSettingsIOs = const IOSInitializationSettings(
+  var initializationSettingsIOs = const DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false);
@@ -40,7 +40,9 @@ Future<void> _androidSettings(WidgetRef ref) async {
 
   // Check click notification when app in foreground
   await flutterLocalNotificationsPlugin.initialize(initSettings,
-      onSelectNotification: (String? payload) async {
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) async {
+    final payload = notificationResponse.payload;
     debugPrint("FCM: On select notification");
     if (payload != null) {
       debugPrint('FCM: notification payload: $payload');
@@ -68,11 +70,13 @@ Future<void> _androidSettings(WidgetRef ref) async {
               // ignore: flutter_style_todos
               // TODO add a proper drawable resource to android, for now using
               //      one that already exists in example app.
-              icon: '@drawable/ic_notification', // The icon should use one color, it will have problem when show with icon use many colors
+              icon:
+                  '@drawable/ic_notification', // The icon should use one color, it will have problem when show with icon use many colors
               color: const Color.fromRGBO(255, 255, 0, 1.0),
             ),
           ),
-          payload: notification.body); // can create a payload with json format and parse when click on push
+          payload: notification
+              .body); // can create a payload with json format and parse when click on push
     }
   });
 }

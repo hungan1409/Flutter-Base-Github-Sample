@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:app/data/provider/shared_preference_provider.dart';
 import 'package:app/foundation/constants.dart';
 import 'package:app/foundation/keys.dart';
@@ -6,12 +7,12 @@ import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final languageViewModelProvider =
-    ChangeNotifierProvider((ref) => LanguageViewModel(ref.read));
+    ChangeNotifierProvider((ref) => LanguageViewModel(ref));
 
 class LanguageViewModel extends ChangeNotifier {
-  LanguageViewModel(this._reader);
+  LanguageViewModel(this._ref);
 
-  final Reader _reader;
+  final Ref _ref;
 
   // Change Locale
   late Locale _currentLocale =
@@ -19,7 +20,7 @@ class LanguageViewModel extends ChangeNotifier {
 
   Locale get currentLocale => _currentLocale;
 
-  late final _prefs = _reader(prefsProvider);
+  late final _prefs = _ref.read(prefsProvider);
 
   changeLocale(Locale locale) {
     _prefs.setString(Keys.currentLocale, locale.languageCode);
