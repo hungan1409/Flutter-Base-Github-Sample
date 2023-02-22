@@ -32,7 +32,7 @@ Future<void> main() async {
   };
 
   // Remote config
-  await RemoteConfig.instance.setConfigSettings(RemoteConfigSettings(
+  await FirebaseRemoteConfig.instance.setConfigSettings(RemoteConfigSettings(
     fetchTimeout: const Duration(seconds: 10),
     minimumFetchInterval: Duration.zero,
   ));
@@ -42,7 +42,8 @@ Future<void> main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
 
   // Get flavor
-  AppConfig.flavorEnvironment = await Constants.platformChannel.invokeMethod(Constants.getFlavor);
+  AppConfig.flavorEnvironment =
+      await Constants.platformChannel.invokeMethod(Constants.getFlavor);
   debugPrint('STARTED WITH FLAVOR ${AppConfig.flavorEnvironment}');
 
   if (kReleaseMode) {

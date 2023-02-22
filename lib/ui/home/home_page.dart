@@ -47,7 +47,7 @@ class HomePage extends HookConsumerWidget {
 
     useEffect(() {
       _checkForceUpdate(context);
-    });
+    }, []);
 
     return Scaffold(
       appBar: AppBar(
@@ -141,9 +141,9 @@ class HomePage extends HookConsumerWidget {
   }
 
   void _checkForceUpdate(BuildContext context) {
-    RemoteConfig.instance.fetchAndActivate().then((value) async {
+    FirebaseRemoteConfig.instance.fetchAndActivate().then((value) async {
       String forceUpdateVersion =
-          RemoteConfig.instance.getString(Keys.forceUpdateVersion);
+          FirebaseRemoteConfig.instance.getString(Keys.forceUpdateVersion);
       final packageInfo = await PackageInfo.fromPlatform();
       String currentVersion = packageInfo.version.split("-")[0];
       debugPrint("Your current app version is $currentVersion");
