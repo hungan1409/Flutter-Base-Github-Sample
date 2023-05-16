@@ -19,11 +19,11 @@ class _GithubDataSource implements GithubDataSource {
   String? baseUrl;
 
   @override
-  Future<User> getUser({required id}) async {
+  Future<User> getUser({required String id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'GET',
@@ -43,9 +43,9 @@ class _GithubDataSource implements GithubDataSource {
 
   @override
   Future<List<Repos>> getRepos({
-    required id,
-    required page,
-    perPage = 25,
+    required String id,
+    required int page,
+    int perPage = 25,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -53,7 +53,7 @@ class _GithubDataSource implements GithubDataSource {
       r'per_page': perPage,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Repos>>(Options(
       method: 'GET',

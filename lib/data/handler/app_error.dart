@@ -34,10 +34,8 @@ class AppError {
           break;
         case DioErrorType.connectionTimeout:
         case DioErrorType.receiveTimeout:
-          type = AppErrorType.timeout;
-          break;
         case DioErrorType.sendTimeout:
-          type = AppErrorType.network;
+          type = AppErrorType.timeout;
           break;
         case DioErrorType.badResponse:
           // TODO(api): need define more http status;

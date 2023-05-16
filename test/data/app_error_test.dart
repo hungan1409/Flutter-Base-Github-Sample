@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app/data/app_error.dart';
+import 'package:app/data/handler/app_error.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,7 +9,7 @@ void main() {
     expect(
         AppError(
           DioError(
-              type: DioErrorType.connectTimeout,
+              type: DioErrorType.connectionTimeout,
               requestOptions: RequestOptions(path: '')),
         ).type,
         equals(AppErrorType.timeout));
@@ -33,7 +33,7 @@ void main() {
     expect(
         AppError(
           DioError(
-              type: DioErrorType.response,
+              type: DioErrorType.badResponse,
               requestOptions: RequestOptions(path: ''),
               response: Response(
                   requestOptions: RequestOptions(path: ''), statusCode: 400)),
@@ -43,7 +43,7 @@ void main() {
     expect(
         AppError(
           DioError(
-              type: DioErrorType.response,
+              type: DioErrorType.badResponse,
               requestOptions: RequestOptions(path: ''),
               response: Response(
                   requestOptions: RequestOptions(path: ''), statusCode: 401)),
@@ -53,7 +53,7 @@ void main() {
     expect(
         AppError(
           DioError(
-              type: DioErrorType.response,
+              type: DioErrorType.badResponse,
               requestOptions: RequestOptions(path: ''),
               response: Response(
                   requestOptions: RequestOptions(path: ''), statusCode: 500)),
@@ -72,7 +72,7 @@ void main() {
         AppError(
           DioError(
               error: const SocketException('Failed host lookup'),
-              type: DioErrorType.other,
+              type: DioErrorType.unknown,
               requestOptions: RequestOptions(path: '')),
         ).type,
         equals(AppErrorType.network));
@@ -80,7 +80,7 @@ void main() {
     expect(
         AppError(
           DioError(
-              type: DioErrorType.other,
+              type: DioErrorType.unknown,
               requestOptions: RequestOptions(path: '')),
         ).type,
         equals(AppErrorType.unknown));

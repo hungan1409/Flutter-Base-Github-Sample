@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,12 +15,13 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/article_placeholder.webp
-  AssetGenImage get articlePlaceholder =>
-      const AssetGenImage('assets/images/article_placeholder.webp');
+  AssetGenImage get articlePlaceholder => const AssetGenImage('assets/images/article_placeholder.webp');
 
   /// File path: assets/images/icon_placeholder.jpg
-  AssetGenImage get iconPlaceholder =>
-      const AssetGenImage('assets/images/icon_placeholder.jpg');
+  AssetGenImage get iconPlaceholder => const AssetGenImage('assets/images/icon_placeholder.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [articlePlaceholder, iconPlaceholder];
 }
 
 class $AssetsSvgsGen {
@@ -28,6 +29,9 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/github.svg
   SvgGenImage get github => const SvgGenImage('assets/svgs/github.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [github];
 }
 
 class Assets {
@@ -95,6 +99,17 @@ class AssetGenImage {
     );
   }
 
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
   String get path => _assetName;
 
   String get keyName => _assetName;
@@ -116,13 +131,14 @@ class SvgGenImage {
     AlignmentGeometry alignment = Alignment.center,
     bool allowDrawingOutsideViewBox = false,
     WidgetBuilder? placeholderBuilder,
-    Color? color,
-    BlendMode colorBlendMode = BlendMode.srcIn,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
-    bool cacheColorFilter = false,
-    SvgTheme? theme,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
       _assetName,
@@ -136,15 +152,18 @@ class SvgGenImage {
       alignment: alignment,
       allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
       placeholderBuilder: placeholderBuilder,
-      color: color,
-      colorBlendMode: colorBlendMode,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
-      theme: theme,
     );
   }
 
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }

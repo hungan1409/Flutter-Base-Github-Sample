@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user.freezed.dart';
-part 'user.g.dart';
+part 'generated/user.freezed.dart';
+part 'generated/user.g.dart';
 
 @freezed
-abstract class User with _$User {
+class User with _$User {
   factory User({
     @JsonKey(name: 'avatar_url') final String? avatarUrl,
     @JsonKey(name: 'html_url') final String? htmlUrl,

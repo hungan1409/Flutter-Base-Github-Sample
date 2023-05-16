@@ -1,31 +1,23 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
 part of 'app_router.dart';
 
-class _$AppRouter extends RootStackRouter {
-  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+abstract class _$AppRouter extends RootStackRouter {
+  // ignore: unused_element
+  _$AppRouter({super.navigatorKey});
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    HomeRoute.name: (routeData) {
-      return MaterialPageX<HomePage>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
     DetailRoute.name: (routeData) {
       final args = routeData.argsAs<DetailRouteArgs>();
-      return MaterialPageX<DetailPage>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: DetailPage(
           key: args.key,
@@ -34,46 +26,18 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     LanguageRoute.name: (routeData) {
-      return MaterialPageX<LanguagePage>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LanguagePage(),
       );
     },
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomePage(),
+      );
+    },
   };
-
-  @override
-  List<RouteConfig> get routes => [
-        RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: '/home',
-          fullMatch: true,
-        ),
-        RouteConfig(
-          HomeRoute.name,
-          path: '/home',
-        ),
-        RouteConfig(
-          DetailRoute.name,
-          path: '/detail',
-        ),
-        RouteConfig(
-          LanguageRoute.name,
-          path: '/language',
-        ),
-      ];
-}
-
-/// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute()
-      : super(
-          HomeRoute.name,
-          path: '/home',
-        );
-
-  static const String name = 'HomeRoute';
 }
 
 /// generated route for
@@ -82,16 +46,19 @@ class DetailRoute extends PageRouteInfo<DetailRouteArgs> {
   DetailRoute({
     Key? key,
     required Repos repos,
+    List<PageRouteInfo>? children,
   }) : super(
           DetailRoute.name,
-          path: '/detail',
           args: DetailRouteArgs(
             key: key,
             repos: repos,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'DetailRoute';
+
+  static const PageInfo<DetailRouteArgs> page = PageInfo<DetailRouteArgs>(name);
 }
 
 class DetailRouteArgs {
@@ -113,11 +80,27 @@ class DetailRouteArgs {
 /// generated route for
 /// [LanguagePage]
 class LanguageRoute extends PageRouteInfo<void> {
-  const LanguageRoute()
+  const LanguageRoute({List<PageRouteInfo>? children})
       : super(
           LanguageRoute.name,
-          path: '/language',
+          initialChildren: children,
         );
 
   static const String name = 'LanguageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

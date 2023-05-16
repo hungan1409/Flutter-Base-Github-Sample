@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:app/app.dart';
-import 'package:app/data/provider/shared_preference_provider.dart';
+import 'package:app/data/local/app_preferences.dart';
 import 'package:app/foundation/app_config.dart';
 import 'package:app/foundation/constants.dart';
+import 'package:app/provider/shared_preference_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -19,12 +20,13 @@ Future<void> main() async {
   // debugPaintSizeEnabled = true;
   // debugPaintLayerBordersEnabled = true;
 
+  // Shared Preferences
+  await AppPreferences.init();
   // Firebase
   await Firebase.initializeApp();
 
   // Crashlytics
-  await FirebaseCrashlytics.instance
-      .setCrashlyticsCollectionEnabled(kDebugMode);
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(kDebugMode);
   Function originalOnError = FlutterError.onError!;
   FlutterError.onError = (errorDetails) async {
     await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
@@ -42,8 +44,7 @@ Future<void> main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
 
   // Get flavor
-  AppConfig.flavorEnvironment =
-      await Constants.platformChannel.invokeMethod(Constants.getFlavor);
+  AppConfig.flavorEnvironment = await Constants.platformChannel.invokeMethod(Constants.getFlavor);
   debugPrint('STARTED WITH FLAVOR ${AppConfig.flavorEnvironment}');
 
   if (kReleaseMode) {
@@ -51,9 +52,7 @@ Future<void> main() async {
   }
 
   runZonedGuarded(() {
-    runApp(ProviderScope(
-        overrides: [prefsProvider.overrideWithValue(sharedPreferences)],
-        child: const App()));
+    runApp(ProviderScope(overrides: [prefsProvider.overrideWithValue(sharedPreferences)], child: const App()));
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });

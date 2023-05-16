@@ -1,5 +1,5 @@
 import 'package:app/foundation/constants.dart';
-import 'package:app/foundation/extension/padding.dart';
+import 'package:app/foundation/extension/widget_extension.dart';
 import 'package:app/ui/hook/use_l10n.dart';
 import 'package:app/ui/hook/use_router.dart';
 import 'package:app/ui/language/language_view_model.dart';
@@ -7,9 +7,11 @@ import 'package:app/ui/theme/app_colors.dart';
 import 'package:app/ui/theme/app_theme.dart';
 import 'package:app/ui/theme/font_size.dart';
 import 'package:app/ui/theme/layout_size.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+@RoutePage()
 class LanguagePage extends HookConsumerWidget {
   const LanguagePage({Key? key}) : super(key: key);
 
@@ -68,7 +70,7 @@ class LanguagePage extends HookConsumerWidget {
                   Text(
                     name,
                     style: const TextStyle(fontSize: FontSize.pt16),
-                  ).padding(left: LayoutSize.sizePadding16),
+                  ).paddingOnly(left: LayoutSize.sizePadding16),
                 ],
               ),
             ),

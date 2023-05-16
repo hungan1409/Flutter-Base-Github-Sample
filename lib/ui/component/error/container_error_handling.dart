@@ -1,4 +1,4 @@
-import 'package:app/data/provider/error_provider.dart';
+import 'package:app/provider/error_provider.dart';
 import 'package:app/ui/component/dialog/error_dialog.dart';
 import 'package:app/ui/component/loading/container_with_loading.dart';
 import 'package:flutter/cupertino.dart';

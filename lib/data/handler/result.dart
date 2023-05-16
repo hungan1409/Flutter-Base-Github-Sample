@@ -1,12 +1,11 @@
-import 'package:app/data/app_error.dart';
-import 'package:app/data/provider/error_provider.dart';
-import 'package:flutter/foundation.dart';
+import 'package:app/data/handler/app_error.dart';
+import 'package:app/data/handler/error_handler.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'result.freezed.dart';
 
 @freezed
-abstract class Result<T> with _$Result<T> {
+class Result<T> with _$Result<T> {
   const Result._();
 
   const factory Result.success({required T data}) = Success<T>;
@@ -24,13 +23,11 @@ abstract class Result<T> with _$Result<T> {
     }
   }
 
-  static Future<Result<T>> guardFuture<T>(
-      Future<T> Function() future, ErrorHandler errorHandler) async {
+  static Future<Result<T>> guardFuture<T>(Future<T> Function() future, ErrorHandler errorHandler) async {
     try {
       return Result.success(data: await future());
     } on Exception catch (e) {
       final appError = AppError(e);
-      // listen and handle the error for app
       errorHandler.setError(appError);
       return Result.failure(error: appError);
     }

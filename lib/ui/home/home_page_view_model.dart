@@ -1,14 +1,13 @@
+import 'package:app/data/handler/result.dart';
 import 'package:app/data/model/repos.dart';
-import 'package:app/data/model/result.dart';
 import 'package:app/data/model/user.dart';
 import 'package:app/data/repository/github_repository.dart';
-import 'package:app/data/repository/github_repository_impl.dart';
+import 'package:app/provider/data_provider.dart';
 import 'package:app/ui/loading_state_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final homeViewModelProvider =
-    ChangeNotifierProvider((ref) => HomeViewModel(ref));
+final homeViewModelProvider = ChangeNotifierProvider((ref) => HomeViewModel(ref));
 
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this._ref);
@@ -38,18 +37,12 @@ class HomeViewModel extends ChangeNotifier {
 
   // Get information of the user
   Future<void> fetchUser(String userId) {
-    return _repository
-        .getUser(userId)
-        .then((value) => _user = value)
-        .whenComplete(notifyListeners);
+    return _repository.getUser(userId).then((value) => _user = value).whenComplete(notifyListeners);
   }
 
   // Get list repos of the user
-  Future<Result<List<Repos>>> fetchReposPage(String userId, int page,
-      [int perPage = 25]) {
-    return _repository
-        .getRepos(userId, page, perPage)
-        .whenComplete(notifyListeners);
+  Future<Result<List<Repos>>> fetchReposPage(String userId, int page, [int perPage = 25]) {
+    return _repository.getRepos(userId, page, perPage).whenComplete(notifyListeners);
   }
 
   void saveInfoSearch(String text) {

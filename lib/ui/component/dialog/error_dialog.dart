@@ -1,10 +1,9 @@
-import 'package:app/data/app_error.dart';
+import 'package:app/data/handler/app_error.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
-void handleError(BuildContext context, AppError appError,
-    [VoidCallback? callback]) {
+void handleError(BuildContext context, AppError appError, [VoidCallback? callback]) {
   final l10n = L10n.of(context)!;
   String message = parseError(context, appError);
 

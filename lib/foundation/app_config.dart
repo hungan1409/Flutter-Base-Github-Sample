@@ -1,3 +1,9 @@
+import 'package:app/foundation/flavor.dart';
+
 class AppConfig {
-  static String flavorEnvironment = "development";
+  // Flavor
+  static String flavorEnvironment = Flavor.development.name;
+
+  static const appName = "Vene";
+  static const endpoint = "";
 }

@@ -1,8 +1,7 @@
-import 'package:app/data/provider/shared_preference_provider.dart';
 import 'package:app/foundation/keys.dart';
+import 'package:app/provider/shared_preference_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,23 +24,17 @@ Future<void> _androidSettings(WidgetRef ref) async {
   );
 
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-  var initializationSettingsAndroid =
-      const AndroidInitializationSettings('@drawable/ic_notification');
+  var initializationSettingsAndroid = const AndroidInitializationSettings('@drawable/ic_notification');
   var initializationSettingsIOs = const DarwinInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false);
-  var initSettings = InitializationSettings(
-      android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
+      requestAlertPermission: false, requestBadgePermission: false, requestSoundPermission: false);
+  var initSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
 
   // Check click notification when app in foreground
   await flutterLocalNotificationsPlugin.initialize(initSettings,
-      onDidReceiveNotificationResponse:
-          (NotificationResponse notificationResponse) async {
+      onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
     final payload = notificationResponse.payload;
     debugPrint("FCM: On select notification");
     if (payload != null) {
@@ -52,8 +45,7 @@ Future<void> _androidSettings(WidgetRef ref) async {
 
   // Receive PN when app in foreground
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    debugPrint(
-        'FCM: Receive a foreground message ${message.notification?.title}');
+    debugPrint('FCM: Receive a foreground message ${message.notification?.title}');
     final notification = message.notification;
     final android = message.notification?.android;
 
@@ -70,13 +62,12 @@ Future<void> _androidSettings(WidgetRef ref) async {
               // ignore: flutter_style_todos
               // TODO add a proper drawable resource to android, for now using
               //      one that already exists in example app.
-              icon:
-                  '@drawable/ic_notification', // The icon should use one color, it will have problem when show with icon use many colors
+              icon: '@drawable/ic_notification',
+              // The icon should use one color, it will have problem when show with icon use many colors
               color: const Color.fromRGBO(255, 255, 0, 1.0),
             ),
           ),
-          payload: notification
-              .body); // can create a payload with json format and parse when click on push
+          payload: notification.body); // can create a payload with json format and parse when click on push
     }
   });
 }

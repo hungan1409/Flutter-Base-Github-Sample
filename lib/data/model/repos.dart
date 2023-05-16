@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'repos.freezed.dart';
-part 'repos.g.dart';
+part 'generated/repos.freezed.dart';
+part 'generated/repos.g.dart';
 
 @freezed
-abstract class Repos with _$Repos {
+class Repos with _$Repos {
   factory Repos({
     @JsonKey(name: 'description') final String? description,
     @JsonKey(name: 'forks_count') final int? forksCount,

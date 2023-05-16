@@ -1,0 +1,16 @@
+targets:
+  $default:
+    builders:
+      source_gen:combining_builder:
+        options:
+          build_extensions:
+            '^lib/data/model/{{}}.dart': 'lib/data/model/generated/{{}}.g.dart'
+            '^lib/data/remote/{{}}.dart': 'lib/data/remote/{{}}.g.dart'
+            '^lib/data/repository/{{}}.dart': 'lib/data/repository/{{}}.g.dart'
+            '^lib/data/handler/{{}}.dart': 'lib/data/handler/{{}}.g.dart'
+
+      freezed:
+        options:
+          build_extensions:
+            '^lib/data/model/{{}}.dart': 'lib/data/model/generated/{{}}.freezed.dart'
+            '^lib/data/handler/{{}}.dart': 'lib/data/handler/{{}}.freezed.dart'
