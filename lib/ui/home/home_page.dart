@@ -135,21 +135,36 @@ class HomePage extends HookConsumerWidget {
     homeViewModel.refresh();
   }
 
-  void _checkForceUpdate(BuildContext context) {
+  Future<void> _checkForceUpdate(BuildContext context) async {
+    final packageInfo = await PackageInfo.fromPlatform();
     FirebaseRemoteConfig.instance.fetchAndActivate().then((value) async {
       String forceUpdateVersion = FirebaseRemoteConfig.instance.getString(Keys.forceUpdateVersion);
-      final packageInfo = await PackageInfo.fromPlatform();
       String currentVersion = packageInfo.version.split("-")[0];
       debugPrint("Your current app version is $currentVersion");
       debugPrint("The force update app version is $forceUpdateVersion");
 
+      final splitCurrentVersion = currentVersion.split(".");
+      final splitForceUpdateVersion = forceUpdateVersion.split(".");
+
       //Compare version
       try {
-        if (int.parse(forceUpdateVersion.replaceAll(".", "")) > int.parse(currentVersion.replaceAll(".", ""))) {
-          debugPrint("Force update the application!");
-          showForceUpdateDialog(context: context, appPackage: packageInfo.packageName);
+        for (int i = 0; i < splitForceUpdateVersion.length; i++) {
+          if (splitCurrentVersion.length > i) {
+            if (int.parse(splitForceUpdateVersion[i]) > int.parse(splitCurrentVersion[i])) {
+              debugPrint("Force update the application!");
+              showForceUpdateDialog(context: context, appPackage: packageInfo.packageName);
+              return;
+            } else if (int.parse(splitForceUpdateVersion[i]) < int.parse(splitCurrentVersion[i])) {
+              return;
+            }
+          } else {
+            // in case fore update version have length bigger than current version. ex: 1.0.9.1 vs 1.0.9
+            showForceUpdateDialog(context: context, appPackage: packageInfo.packageName);
+          }
         }
-      } on Exception catch (_, ex) {}
+      } catch (e) {
+        debugPrint(e.toString());
+      }
     });
   }
 }
