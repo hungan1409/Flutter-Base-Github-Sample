@@ -6,6 +6,7 @@
   "repositories": "Repositories",
   "noResult": "No item found!",
   "lastUpdate": "Last updated at ",
+  "setting": "Setting",
   "language": "Language",
   "force_update_title": "UPDATE NEW VERSION",
   "force_update_content": "A new version of this app is available now!"

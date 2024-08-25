@@ -6,6 +6,7 @@
   "repositories": "リポジトリ",
   "noResult": "アイテムが見つかりません!",
   "lastUpdate": "最終更新日 ",
+  "setting": "設定",
   "language": "言語",
   "force_update_title": "新しいバージョンへアップデートする",
   "force_update_content": "新しいバージョンが利用可能になりました！"

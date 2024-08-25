@@ -45,9 +45,12 @@ class HomePage extends HookConsumerWidget {
       }
     });
 
-    useEffect(() {
-      _checkForceUpdate(context);
-    }, []);
+    useEffect(
+      () {
+        _checkForceUpdate(context);
+      },
+      [],
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +64,7 @@ class HomePage extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              router.push(const LanguageRoute());
+              router.push(const SettingRoute());
             },
             icon: const Icon(Icons.settings),
           ),

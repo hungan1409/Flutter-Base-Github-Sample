@@ -2,6 +2,7 @@ import 'package:app/data/model/repos.dart';
 import 'package:app/ui/detail/detail_page.dart';
 import 'package:app/ui/home/home_page.dart';
 import 'package:app/ui/language/language_page.dart';
+import 'package:app/ui/setting/setting_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +14,10 @@ part 'provider.dart';
 @AutoRouterConfig(
   replaceInRouteName: 'Page|Screen,Route',
 )
-class AppRouter extends _$AppRouter {
+class AppRouter extends RootStackRouter {
+  @override
+  RouteType get defaultRouteType => const RouteType.material(); //.cupertino, .adaptive ..etc
+
   @override
   final List<AutoRoute> routes = [
     //HomeScreen is generated as HomeRoute because
@@ -26,6 +30,10 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: '/detail',
       page: DetailRoute.page,
+    ),
+    AutoRoute(
+      path: '/setting',
+      page: SettingRoute.page,
     ),
     AutoRoute(
       path: '/language',

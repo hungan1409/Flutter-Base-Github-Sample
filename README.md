@@ -8,8 +8,8 @@ https://user-images.githubusercontent.com/43336844/166135050-4dd376ff-e9a5-4c82-
 
 ## Installation
 
-- Dart 2.19.6
-- Flutter 3.7.11
+- Dart 3.5.0
+- Flutter 3.24.0
 - [npm (for git hooks)](https://treehouse.github.io/installation-guides/mac/node-mac.html)
 
 ## Environment
@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/43336844/166135050-4dd376ff-e9a5-4c82-
 **Android**
 - Android 5.1+
     - minSdkVersion 22
-- targetSdkVersion 33 
+- targetSdkVersion 34 
 
 ## App architecture
 

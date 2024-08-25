@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class LanguagePage extends HookConsumerWidget {
-  const LanguagePage({Key? key}) : super(key: key);
+class SettingPage extends HookConsumerWidget {
+  const SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +30,7 @@ class LanguagePage extends HookConsumerWidget {
             router.popForced();
           },
         ),
-        title: Text(l10n.language),
+        title: Text(l10n.setting),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),

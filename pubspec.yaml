@@ -5,7 +5,7 @@ version: 1.0.0+1
 publish_to: 'none'
 
 environment:
-  sdk: '>=2.19.0 <4.0.0'
+  sdk: ^3.5.0
 
 dependencies:
   flutter:
@@ -15,101 +15,104 @@ dependencies:
 
   # Common
   intl:
-  path_provider: ^2.0.14
+  path_provider: ^2.1.4
 
 
   # Collection
-  collection: ^1.17.0
+  collection: ^1.18.0
 
   # Convert between Enum and String
   enum_to_string: ^2.0.1
 
   # RiverPod
-  flutter_hooks: ^0.18.6
-  hooks_riverpod: ^2.3.5
-  riverpod_annotation: ^2.1.0
+  flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.5.2
+  riverpod_annotation: ^2.3.5
 
   # API
-  dio: ^5.1.1
-  pretty_dio_logger: ^1.3.1
-  retrofit: ^4.0.1
-  ua_client_hints: ^1.1.3
+  dio: ^5.6.0
+  pretty_dio_logger: ^1.4.0
+  retrofit: ^4.2.0
+  ua_client_hints: ^1.3.1
 
   # Database
-  shared_preferences: ^2.1.0
+  shared_preferences: ^2.3.2
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
 
   # Firebase
-  firebase_core: ^2.10.0
-  firebase_messaging: ^14.4.1
-  firebase_crashlytics: ^3.2.0
-  firebase_performance_dio: ^0.5.0
-  firebase_remote_config: ^4.1.0
-  flutter_local_notifications: ^14.0.0+1
+  firebase_core: ^3.3.0
+  firebase_messaging: ^15.0.4
+  firebase_crashlytics: ^4.0.4
+  firebase_performance_dio: ^0.7.1
+  firebase_remote_config: ^5.0.4
+  flutter_local_notifications: ^17.2.2
 
   # Model
-  freezed: ^2.3.2
-  freezed_annotation: ^2.2.0
-  json_annotation: ^4.8.1
+  freezed: ^2.5.7
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
   equatable: ^2.0.5
 
 
 
   # For UI
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.8
   flutter_rating_bar: ^4.0.1
-  google_fonts: ^4.0.3
-  webview_flutter: ^3.0.0
+  google_fonts: ^6.2.1
+  webview_flutter: ^4.9.0
 
   # Screen Route
-  auto_route: ^6.3.0
+  auto_route: ^9.2.0
 
   # Image
   cached_network_image: ^3.2.3
-  flutter_svg: ^2.0.5
+  flutter_svg: ^2.0.10+1
 
   # Scroll
   sliding_up_panel: ^2.0.0+1
-  carousel_slider: ^4.1.1
+  carousel_slider: ^5.0.0
 
   # Loading
   progress_indicators: ^1.0.0
-  loading_indicator: ^3.1.0
+  loading_indicator: ^3.1.1
 
   # For querying information about an application package.
-  package_info_plus: ^3.1.2
+  package_info_plus: ^8.0.2
 
   # For launching url
-  url_launcher: ^6.1.10
+  url_launcher: ^6.3.0
+
+  # For scale screen multi phones
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.1
-  build_runner: ^2.3.3
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.12
 
   # model gen
-  json_serializable: ^6.6.1
-
-  # Database
-  isar_generator: ^3.1.0+1
+  json_serializable: ^6.8.0
 
   # UI gen
-  auto_route_generator: ^6.2.0
+  auto_route_generator: ^9.0.0
 
   # Assets gen
-  flutter_gen_runner: ^5.3.0
+  flutter_gen_runner: ^5.6.0
 
   # API gen
-  retrofit_generator: ^6.0.0+2
+  retrofit_generator: ^8.2.0
 
   # Riverpod gen
-  riverpod_generator: ^2.2.0
+  riverpod_generator: ^2.4.3
 
   # For change package name quickly
-  change_app_package_name: ^1.1.0
+  change_app_package_name: ^1.3.0
+
+dependency_overrides:
+  watcher: ^1.1.0
 
 flutter_gen:
   output: lib/gen/

@@ -12,7 +12,7 @@ part of '../repos.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Repos _$ReposFromJson(Map<String, dynamic> json) {
   return _Repos.fromJson(json);
@@ -39,8 +39,12 @@ mixin _$Repos {
   @JsonKey(name: 'html_url')
   String? get htmlUrl => throw _privateConstructorUsedError;
 
+  /// Serializes this Repos to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Repos
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReposCopyWith<Repos> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -71,6 +75,8 @@ class _$ReposCopyWithImpl<$Res, $Val extends Repos>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Repos
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -126,9 +132,10 @@ class _$ReposCopyWithImpl<$Res, $Val extends Repos>
 }
 
 /// @nodoc
-abstract class _$$_ReposCopyWith<$Res> implements $ReposCopyWith<$Res> {
-  factory _$$_ReposCopyWith(_$_Repos value, $Res Function(_$_Repos) then) =
-      __$$_ReposCopyWithImpl<$Res>;
+abstract class _$$ReposImplCopyWith<$Res> implements $ReposCopyWith<$Res> {
+  factory _$$ReposImplCopyWith(
+          _$ReposImpl value, $Res Function(_$ReposImpl) then) =
+      __$$ReposImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -144,11 +151,15 @@ abstract class _$$_ReposCopyWith<$Res> implements $ReposCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ReposCopyWithImpl<$Res> extends _$ReposCopyWithImpl<$Res, _$_Repos>
-    implements _$$_ReposCopyWith<$Res> {
-  __$$_ReposCopyWithImpl(_$_Repos _value, $Res Function(_$_Repos) _then)
+class __$$ReposImplCopyWithImpl<$Res>
+    extends _$ReposCopyWithImpl<$Res, _$ReposImpl>
+    implements _$$ReposImplCopyWith<$Res> {
+  __$$ReposImplCopyWithImpl(
+      _$ReposImpl _value, $Res Function(_$ReposImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Repos
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,7 +173,7 @@ class __$$_ReposCopyWithImpl<$Res> extends _$ReposCopyWithImpl<$Res, _$_Repos>
     Object? watchersCount = freezed,
     Object? htmlUrl = freezed,
   }) {
-    return _then(_$_Repos(
+    return _then(_$ReposImpl(
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -205,8 +216,8 @@ class __$$_ReposCopyWithImpl<$Res> extends _$ReposCopyWithImpl<$Res, _$_Repos>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Repos implements _Repos {
-  _$_Repos(
+class _$ReposImpl implements _Repos {
+  _$ReposImpl(
       {@JsonKey(name: 'description') this.description,
       @JsonKey(name: 'forks_count') this.forksCount,
       @JsonKey(name: 'full_name') this.fullName,
@@ -217,8 +228,8 @@ class _$_Repos implements _Repos {
       @JsonKey(name: 'watchers_count') this.watchersCount,
       @JsonKey(name: 'html_url') this.htmlUrl});
 
-  factory _$_Repos.fromJson(Map<String, dynamic> json) =>
-      _$$_ReposFromJson(json);
+  factory _$ReposImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReposImplFromJson(json);
 
   @override
   @JsonKey(name: 'description')
@@ -254,10 +265,10 @@ class _$_Repos implements _Repos {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Repos &&
+            other is _$ReposImpl &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.forksCount, forksCount) ||
@@ -276,7 +287,7 @@ class _$_Repos implements _Repos {
             (identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -290,15 +301,17 @@ class _$_Repos implements _Repos {
       watchersCount,
       htmlUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Repos
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReposCopyWith<_$_Repos> get copyWith =>
-      __$$_ReposCopyWithImpl<_$_Repos>(this, _$identity);
+  _$$ReposImplCopyWith<_$ReposImpl> get copyWith =>
+      __$$ReposImplCopyWithImpl<_$ReposImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReposToJson(
+    return _$$ReposImplToJson(
       this,
     );
   }
@@ -314,9 +327,9 @@ abstract class _Repos implements Repos {
       @JsonKey(name: 'stargazers_count') final int? stargazersCount,
       @JsonKey(name: 'updated_at') final String? updatedAt,
       @JsonKey(name: 'watchers_count') final int? watchersCount,
-      @JsonKey(name: 'html_url') final String? htmlUrl}) = _$_Repos;
+      @JsonKey(name: 'html_url') final String? htmlUrl}) = _$ReposImpl;
 
-  factory _Repos.fromJson(Map<String, dynamic> json) = _$_Repos.fromJson;
+  factory _Repos.fromJson(Map<String, dynamic> json) = _$ReposImpl.fromJson;
 
   @override
   @JsonKey(name: 'description')
@@ -345,8 +358,11 @@ abstract class _Repos implements Repos {
   @override
   @JsonKey(name: 'html_url')
   String? get htmlUrl;
+
+  /// Create a copy of Repos
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ReposCopyWith<_$_Repos> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReposImplCopyWith<_$ReposImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

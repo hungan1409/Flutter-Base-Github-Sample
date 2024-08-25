@@ -52,7 +52,12 @@ Future<void> main() async {
   }
 
   runZonedGuarded(() {
-    runApp(ProviderScope(overrides: [prefsProvider.overrideWithValue(sharedPreferences)], child: const App()));
+    runApp(
+      ProviderScope(
+        overrides: [prefsProvider.overrideWithValue(sharedPreferences)],
+        child: const App(),
+      ),
+    );
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });

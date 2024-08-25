@@ -9,37 +9,6 @@
 
 part of 'app_router.dart';
 
-abstract class _$AppRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    DetailRoute.name: (routeData) {
-      final args = routeData.argsAs<DetailRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: DetailPage(
-          key: args.key,
-          repos: args.repos,
-        ),
-      );
-    },
-    LanguageRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const LanguagePage(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [DetailPage]
 class DetailRoute extends PageRouteInfo<DetailRouteArgs> {
@@ -58,7 +27,16 @@ class DetailRoute extends PageRouteInfo<DetailRouteArgs> {
 
   static const String name = 'DetailRoute';
 
-  static const PageInfo<DetailRouteArgs> page = PageInfo<DetailRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DetailRouteArgs>();
+      return DetailPage(
+        key: args.key,
+        repos: args.repos,
+      );
+    },
+  );
 }
 
 class DetailRouteArgs {
@@ -78,20 +56,6 @@ class DetailRouteArgs {
 }
 
 /// generated route for
-/// [LanguagePage]
-class LanguageRoute extends PageRouteInfo<void> {
-  const LanguageRoute({List<PageRouteInfo>? children})
-      : super(
-          LanguageRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'LanguageRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -102,5 +66,48 @@ class HomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomePage();
+    },
+  );
+}
+
+/// generated route for
+/// [LanguagePage]
+class LanguageRoute extends PageRouteInfo<void> {
+  const LanguageRoute({List<PageRouteInfo>? children})
+      : super(
+          LanguageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LanguageRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LanguagePage();
+    },
+  );
+}
+
+/// generated route for
+/// [SettingPage]
+class SettingRoute extends PageRouteInfo<void> {
+  const SettingRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingPage();
+    },
+  );
 }

@@ -20,7 +20,7 @@ class DetailPage extends HookConsumerWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              router.pop();
+              router.popForced();
             },
           ),
           title: Text(repos.fullName.toString()),
@@ -28,9 +28,10 @@ class DetailPage extends HookConsumerWidget {
           centerTitle: true,
         ),
         body: SafeArea(
-          child: WebView(
-            initialUrl: repos.htmlUrl,
-            javascriptMode: JavascriptMode.unrestricted,
+          child: WebViewWidget(
+            controller: WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..loadRequest(Uri.parse(repos.htmlUrl ?? '')),
           ),
         ));
   }
