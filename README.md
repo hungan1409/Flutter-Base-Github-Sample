@@ -8,8 +8,8 @@ https://user-images.githubusercontent.com/43336844/166135050-4dd376ff-e9a5-4c82-
 
 ## Installation
 
-- Dart 3.5.0
-- Flutter 3.24.0
+- Dart 3.6.0
+- Flutter 3.27.0
 - [npm (for git hooks)](https://treehouse.github.io/installation-guides/mac/node-mac.html)
 
 ## Environment
