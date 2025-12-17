@@ -116,7 +116,6 @@ node_modules/
 coverage/
 
 # fvm
-.fvm/flutter_sdk
 
 # p8 file for authentication iOS
 *.p8
@@ -124,3 +123,6 @@ coverage/
 /ios/fastlane/README.md
 /android/Gemfile
 /ios/Gemfile
+
+# FVM Version Cache
+.fvm/

@@ -12,53 +12,68 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  unawaited(
+    runZonedGuarded(
+      () async {
+        WidgetsFlutterBinding.ensureInitialized();
 
-  // debugPaintBaselinesEnabled = true;
-  // debugPaintSizeEnabled = true;
-  // debugPaintLayerBordersEnabled = true;
+        // debugPaintBaselinesEnabled = true;
+        // debugPaintSizeEnabled = true;
+        // debugPaintLayerBordersEnabled = true;
 
-  // Shared Preferences
-  await AppPreferences.init();
-  // Firebase
-  await Firebase.initializeApp();
+        if (kReleaseMode) {
+          debugPrint = (message, {wrapWidth}) {};
+        }
 
-  // Crashlytics
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(kDebugMode);
-  Function originalOnError = FlutterError.onError!;
-  FlutterError.onError = (errorDetails) async {
-    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-    originalOnError(errorDetails);
-  };
+        // Get flavor
+        AppConfig.flavorEnvironment =
+            (await Constants.platformChannel.invokeMethod<String>(
+              Constants.getFlavor,
+            )) ??
+            Flavor.development.name;
+        debugPrint('STARTED WITH FLAVOR ${AppConfig.flavorEnvironment}');
 
-  // Remote config
-  await FirebaseRemoteConfig.instance.setConfigSettings(RemoteConfigSettings(
-    fetchTimeout: const Duration(seconds: 10),
-    minimumFetchInterval: Duration.zero,
-  ));
-  RemoteConfigValue(null, ValueSource.valueStatic);
+        // Shared Preferences
+        await AppPreferences.init();
+        // Firebase
+        await Firebase.initializeApp();
 
-  // Init and get SharedPreferences instance
-  final sharedPreferences = await SharedPreferences.getInstance();
+        // Crashlytics
+        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+          kDebugMode,
+        );
+        final Function originalOnError = FlutterError.onError!;
+        FlutterError.onError = (errorDetails) async {
+          await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+          originalOnError(errorDetails);
+        };
 
-  // Get flavor
-  AppConfig.flavorEnvironment = await Constants.platformChannel.invokeMethod(Constants.getFlavor);
-  debugPrint('STARTED WITH FLAVOR ${AppConfig.flavorEnvironment}');
+        // Remote config
+        await FirebaseRemoteConfig.instance.setConfigSettings(
+          RemoteConfigSettings(
+            fetchTimeout: const Duration(seconds: 10),
+            minimumFetchInterval: Duration.zero,
+          ),
+        );
+        RemoteConfigValue(null, ValueSource.valueStatic);
 
-  if (kReleaseMode) {
-    debugPrint = (message, {wrapWidth}) {};
-  }
+        // Init and get SharedPreferences instance
+        final sharedPreferences = await SharedPreferences.getInstance();
 
-  runZonedGuarded(() {
-    runApp(
-      ProviderScope(
-        overrides: [prefsProvider.overrideWithValue(sharedPreferences)],
-        child: const App(),
-      ),
-    );
-  }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
-  });
+        runApp(
+          ProviderScope(
+            overrides: [prefsProvider.overrideWithValue(sharedPreferences)],
+            observers: [if (AppConfig.isShowLog()) TalkerRiverpodObserver()],
+            child: const App(),
+          ),
+        );
+      },
+      (error, stackTrace) {
+        FirebaseCrashlytics.instance.recordError(error, stackTrace);
+      },
+    ),
+  );
 }

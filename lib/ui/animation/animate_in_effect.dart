@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class AnimateInEffect extends StatefulWidget {
   const AnimateInEffect({
-    Key? key,
+    super.key,
     required this.child,
     this.intervalStart = 0,
     this.keepAlive = false,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final double intervalStart;
@@ -35,27 +35,18 @@ class _AnimateInEffectState extends State<AnimateInEffect>
       () => animationController.forward(),
     );
 
-    Curve intervalCurve = Interval(
+    final Curve intervalCurve = Interval(
       widget.intervalStart,
       1,
       curve: Curves.easeOut,
     );
 
-    offsetAnimation = Tween<Offset>(
-      begin: const Offset(0, 30),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: intervalCurve,
-      ),
+    offsetAnimation = Tween<Offset>(begin: const Offset(0, 30), end: Offset.zero).animate(
+      CurvedAnimation(parent: animationController, curve: intervalCurve),
     );
 
     fadeAnimation = Tween<double>(begin: 0.5, end: 1).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: intervalCurve,
-      ),
+      CurvedAnimation(parent: animationController, curve: intervalCurve),
     );
   }
 
@@ -70,14 +61,8 @@ class _AnimateInEffectState extends State<AnimateInEffect>
     super.build(context);
     return AnimatedBuilder(
       animation: animationController,
-      builder: (context, child) => Transform.translate(
-        offset: offsetAnimation.value,
-        child: child,
-      ),
-      child: FadeTransition(
-        opacity: fadeAnimation,
-        child: widget.child,
-      ),
+      builder: (context, child) => Transform.translate(offset: offsetAnimation.value, child: child),
+      child: FadeTransition(opacity: fadeAnimation, child: widget.child),
     );
   }
 

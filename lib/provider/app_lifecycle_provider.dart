@@ -1,14 +1,21 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final appLifecycleProvider = Provider<AppLifecycleState>((ref) {
-  final observer = _AppLifecycleObserver((value) => ref.state = value);
+final appLifecycleProvider = NotifierProvider<AppLifecycleNotifier, AppLifecycleState>(
+  AppLifecycleNotifier.new,
+);
 
-  final binding = WidgetsBinding.instance..addObserver(observer);
-  ref.onDispose(() => binding.removeObserver(observer));
+class AppLifecycleNotifier extends Notifier<AppLifecycleState> {
+  @override
+  AppLifecycleState build() {
+    final observer = _AppLifecycleObserver((value) => state = value);
 
-  return AppLifecycleState.resumed;
-});
+    WidgetsBinding.instance.addObserver(observer);
+    ref.onDispose(() => WidgetsBinding.instance.removeObserver(observer));
+
+    return AppLifecycleState.resumed;
+  }
+}
 
 class _AppLifecycleObserver extends WidgetsBindingObserver {
   _AppLifecycleObserver(this._didChangeAppLifecycle);

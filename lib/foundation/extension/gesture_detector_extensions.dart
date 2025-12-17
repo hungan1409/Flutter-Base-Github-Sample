@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 
 extension GestureDetectorExt on Widget {
-  Widget onDoubleTap(Function() function) => GestureDetector(
-    onDoubleTap: function,
-    child: this,
-  );
+  Widget onDoubleTap(void Function() function) => GestureDetector(onDoubleTap: function, child: this);
 
-  Widget onTap(Function() function) => GestureDetector(
-    onTap: function,
-    child: this,
-  );
+  Widget onTap(void Function() function) => GestureDetector(onTap: function, child: this);
 
-  Widget onLongPress(Function() function) => GestureDetector(
-    onLongPress: function,
-    child: this,
-  );
+  Widget onLongPress(void Function() function) => GestureDetector(onLongPress: function, child: this);
 }

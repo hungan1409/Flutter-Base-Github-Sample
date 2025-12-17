@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 extension StringCanNullExtension on String? {
   bool get isEmptyOrNull {
-    if (this == "" || this == null) {
+    if (this == '' || this == null) {
       return true;
     }
     return false;
@@ -10,13 +10,11 @@ extension StringCanNullExtension on String? {
 }
 
 extension StringDateTimeExtension on String {
-
   String formatDate(String format) {
     final dateTime = DateTime.parse(this);
     return DateFormat(format).format(dateTime);
   }
 }
-
 
 extension StringExtension on String {
   /// Capitalize each word inside string
@@ -51,10 +49,10 @@ extension StringExtension on String {
   bool isAlphabetOnly() => hasMatch(r'^[a-zA-Z]+$');
 
   /// Checks if string contains at least one Capital Letter
-  bool hasCapitalletter() => hasMatch(r'[A-Z]');
+  bool hasCapitalletter() => hasMatch('[A-Z]');
 
   /// Checks if string is boolean.
   bool isBool() {
-    return (this == 'true' || this == 'false');
+    return this == 'true' || this == 'false';
   }
 }

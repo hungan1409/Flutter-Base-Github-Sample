@@ -3,20 +3,23 @@ class DateTimeUtils {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
+  /// Check if two dates are in the same week.
+  /// Week starts on Monday (ISO standard).
   static bool isSameWeek(DateTime a, DateTime b) {
-    /// Handle Daylight Savings by setting hour to 12:00 Noon
-    /// rather than the default of Midnight
-    a = DateTime.utc(a.year, a.month, a.day);
-    b = DateTime.utc(b.year, b.month, b.day);
+    // Normalize to UTC midnight
+    final dateA = DateTime.utc(a.year, a.month, a.day);
+    final dateB = DateTime.utc(b.year, b.month, b.day);
 
-    var diff = a.toUtc().difference(b.toUtc()).inDays;
+    final diff = dateA.difference(dateB).inDays;
     if (diff.abs() >= 7) {
       return false;
     }
 
-    var min = a.isBefore(b) ? a : b;
-    var max = a.isBefore(b) ? b : a;
-    var result = max.weekday % 7 - min.weekday % 7 >= 0;
-    return result;
+    final min = dateA.isBefore(dateB) ? dateA : dateB;
+    final max = dateA.isBefore(dateB) ? dateB : dateA;
+
+    // Dart weekday: Monday=1, Sunday=7
+    // If max.weekday >= min.weekday → Same week
+    return max.weekday >= min.weekday;
   }
 }

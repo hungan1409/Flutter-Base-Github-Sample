@@ -27,47 +27,60 @@ Future<void> _androidSettings(WidgetRef ref) async {
       .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-  var initializationSettingsAndroid = const AndroidInitializationSettings('@drawable/ic_notification');
-  var initializationSettingsIOs = const DarwinInitializationSettings(
-      requestAlertPermission: false, requestBadgePermission: false, requestSoundPermission: false);
-  var initSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
+  const initializationSettingsAndroid = AndroidInitializationSettings(
+    '@drawable/ic_notification',
+  );
+  const initializationSettingsIOs = DarwinInitializationSettings(
+    requestAlertPermission: false,
+    requestBadgePermission: false,
+    requestSoundPermission: false,
+  );
+  const initSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOs,
+  );
 
   // Check click notification when app in foreground
-  await flutterLocalNotificationsPlugin.initialize(initSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
-    final payload = notificationResponse.payload;
-    debugPrint("FCM: On select notification");
-    if (payload != null) {
-      debugPrint('FCM: notification payload: $payload');
-      // Use for redirect push to specific screen
-    }
-  });
+  await flutterLocalNotificationsPlugin.initialize(
+    initSettings,
+    onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
+      final payload = notificationResponse.payload;
+      debugPrint('FCM: On select notification');
+      if (payload != null) {
+        debugPrint('FCM: notification payload: $payload');
+        // Use for redirect push to specific screen
+      }
+    },
+  );
 
   // Receive PN when app in foreground
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    debugPrint('FCM: Receive a foreground message ${message.notification?.title}');
+    debugPrint(
+      'FCM: Receive a foreground message ${message.notification?.title}',
+    );
     final notification = message.notification;
     final android = message.notification?.android;
 
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              // channel.description,
-              // ignore: flutter_style_todos
-              // TODO add a proper drawable resource to android, for now using
-              //      one that already exists in example app.
-              icon: '@drawable/ic_notification',
-              // The icon should use one color, it will have problem when show with icon use many colors
-              color: const Color.fromRGBO(255, 255, 0, 1.0),
-            ),
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            // channel.description,
+            // ignore: flutter_style_todos
+            // TODO add a proper drawable resource to android, for now using
+            //      one that already exists in example app.
+            icon: '@drawable/ic_notification',
+            // The icon should use one color, it will have problem when show with icon use many colors
+            color: const Color.fromRGBO(255, 255, 0, 1.0),
           ),
-          payload: notification.body); // can create a payload with json format and parse when click on push
+        ),
+        payload: notification.body,
+      ); // can create a payload with json format and parse when click on push
     }
   });
 }
@@ -117,6 +130,8 @@ Future<void> fetchFCMToken(WidgetRef ref) async {
     if (fcmToken != null) {
       debugPrint('Update fcm token');
       final prefs = ref.read(prefsProvider);
+      // can not use cascade operator here
+      // ignore: cascade_invocations
       prefs.setString(Keys.firebaseToken, fcmToken);
     }
   });
@@ -124,6 +139,8 @@ Future<void> fetchFCMToken(WidgetRef ref) async {
   FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
     debugPrint('Called onTokenRefresh and FCM Token: $fcmToken');
     final prefs = ref.read(prefsProvider);
+    // can not use cascade operator here
+    // ignore: cascade_invocations
     prefs.setString(Keys.firebaseToken, fcmToken);
   });
 }

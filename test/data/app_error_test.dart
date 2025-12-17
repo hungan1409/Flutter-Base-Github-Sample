@@ -7,86 +7,98 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('AppError Test', () async {
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.connectionTimeout,
-              requestOptions: RequestOptions(path: '')),
-        ).type,
-        equals(AppErrorType.timeout));
+      AppError(
+        DioException(
+          type: DioExceptionType.connectionTimeout,
+          requestOptions: RequestOptions(),
+        ),
+      ).type,
+      equals(AppErrorType.timeout),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.receiveTimeout,
-              requestOptions: RequestOptions(path: '')),
-        ).type,
-        equals(AppErrorType.timeout));
+      AppError(
+        DioException(
+          type: DioExceptionType.receiveTimeout,
+          requestOptions: RequestOptions(),
+        ),
+      ).type,
+      equals(AppErrorType.timeout),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.sendTimeout,
-              requestOptions: RequestOptions(path: '')),
-        ).type,
-        equals(AppErrorType.network));
+      AppError(
+        DioException(
+          type: DioExceptionType.sendTimeout,
+          requestOptions: RequestOptions(),
+        ),
+      ).type,
+      equals(AppErrorType.network),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.badResponse,
-              requestOptions: RequestOptions(path: ''),
-              response: Response(
-                  requestOptions: RequestOptions(path: ''), statusCode: 400)),
-        ).type,
-        equals(AppErrorType.badRequest));
+      AppError(
+        DioException(
+          type: DioExceptionType.badResponse,
+          requestOptions: RequestOptions(),
+          response: Response(requestOptions: RequestOptions(), statusCode: 400),
+        ),
+      ).type,
+      equals(AppErrorType.badRequest),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.badResponse,
-              requestOptions: RequestOptions(path: ''),
-              response: Response(
-                  requestOptions: RequestOptions(path: ''), statusCode: 401)),
-        ).type,
-        equals(AppErrorType.unauthorized));
+      AppError(
+        DioException(
+          type: DioExceptionType.badResponse,
+          requestOptions: RequestOptions(),
+          response: Response(requestOptions: RequestOptions(), statusCode: 401),
+        ),
+      ).type,
+      equals(AppErrorType.unauthorized),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.badResponse,
-              requestOptions: RequestOptions(path: ''),
-              response: Response(
-                  requestOptions: RequestOptions(path: ''), statusCode: 500)),
-        ).type,
-        equals(AppErrorType.server));
+      AppError(
+        DioException(
+          type: DioExceptionType.badResponse,
+          requestOptions: RequestOptions(),
+          response: Response(requestOptions: RequestOptions(), statusCode: 500),
+        ),
+      ).type,
+      equals(AppErrorType.server),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.cancel,
-              requestOptions: RequestOptions(path: '')),
-        ).type,
-        equals(AppErrorType.cancel));
+      AppError(
+        DioException(
+          type: DioExceptionType.cancel,
+          requestOptions: RequestOptions(),
+        ),
+      ).type,
+      equals(AppErrorType.cancel),
+    );
 
     expect(
-        AppError(
-          DioError(
-              error: const SocketException('Failed host lookup'),
-              type: DioErrorType.unknown,
-              requestOptions: RequestOptions(path: '')),
-        ).type,
-        equals(AppErrorType.network));
+      AppError(
+        DioException(
+          error: const SocketException('Failed host lookup'),
+          requestOptions: RequestOptions(),
+        ),
+      ).type,
+      equals(AppErrorType.network),
+    );
 
     expect(
-        AppError(
-          DioError(
-              type: DioErrorType.unknown,
-              requestOptions: RequestOptions(path: '')),
-        ).type,
-        equals(AppErrorType.unknown));
+      AppError(
+        DioException(
+          requestOptions: RequestOptions(),
+        ),
+      ).type,
+      equals(AppErrorType.unknown),
+    );
 
-    expect(AppError(const FileSystemException()).type,
-        equals(AppErrorType.unknown));
+    expect(AppError(const FileSystemException()).type, equals(AppErrorType.unknown));
 
     expect(AppError(null).type, equals(AppErrorType.unknown));
   });

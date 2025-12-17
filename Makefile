@@ -16,7 +16,7 @@ format:
 
 .PHONY: format-analyze
 format-analyze:
-	flutter format --dry-run lib/
+	dart format . --line-length 120 && dart fix --apply
 	flutter analyze
 
 .PHONY: build-runner

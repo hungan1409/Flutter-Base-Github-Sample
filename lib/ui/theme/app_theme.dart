@@ -3,26 +3,25 @@ import 'package:app/ui/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
 
 export 'package:app/ui/theme/app_text_theme.dart' show TextStyleExt;
 
-final appThemeModeProvider =
-    StateNotifierProvider<StateController<ThemeMode>, ThemeMode>(
-  (ref) => StateController(ThemeMode.dark),
+final appThemeModeProvider = StateNotifierProvider<StateController<ThemeMode>, ThemeMode>(
+  (ref) => StateController(ThemeMode.light),
 );
 
-final appThemeProvider = Provider<AppTheme>(
-  (ref) {
-    final mode = ref.watch(appThemeModeProvider);
-    switch (mode) {
-      case ThemeMode.dark:
-        return AppTheme.dark();
-      case ThemeMode.light:
-      default:
-        return AppTheme.light();
-    }
-  },
-);
+final appThemeProvider = Provider<AppTheme>((ref) {
+  final mode = ref.watch(appThemeModeProvider);
+  switch (mode) {
+    case ThemeMode.dark:
+      return AppTheme.dark();
+    case ThemeMode.light:
+      return AppTheme.light();
+    case ThemeMode.system:
+      return AppTheme.light();
+  }
+});
 
 class AppTheme {
   AppTheme({
@@ -34,7 +33,7 @@ class AppTheme {
 
   factory AppTheme.light() {
     const mode = ThemeMode.light;
-    final appColors = AppColors.light();
+    final appColors = AppColors.light;
     final themeData = ThemeData.light().copyWith(
       scaffoldBackgroundColor: appColors.background,
       textTheme: GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
@@ -42,7 +41,13 @@ class AppTheme {
         backgroundColor: appColors.error,
         behavior: SnackBarBehavior.floating,
       ),
-      unselectedWidgetColor: appColors.background,
+      colorScheme: ColorScheme.light(
+        primary: appColors.primary,
+        secondary: appColors.accent,
+        surface: appColors.surface,
+        error: appColors.error,
+        onSurface: appColors.text,
+      ),
     );
     return AppTheme(
       mode: mode,
@@ -54,7 +59,7 @@ class AppTheme {
 
   factory AppTheme.dark() {
     const mode = ThemeMode.dark;
-    final appColors = AppColors.dark();
+    final appColors = AppColors.dark;
     final themeData = ThemeData.dark().copyWith(
       scaffoldBackgroundColor: appColors.background,
       textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
@@ -62,7 +67,13 @@ class AppTheme {
         backgroundColor: appColors.error,
         behavior: SnackBarBehavior.floating,
       ),
-      unselectedWidgetColor: appColors.background,
+      colorScheme: ColorScheme.dark(
+        primary: appColors.primary,
+        secondary: appColors.accent,
+        surface: appColors.surface,
+        error: appColors.error,
+        onSurface: appColors.text,
+      ),
     );
     return AppTheme(
       mode: mode,
@@ -75,5 +86,5 @@ class AppTheme {
   final ThemeMode mode;
   final ThemeData data;
   final AppTextTheme textTheme;
-  final AppColors appColors;
+  final AppColorScheme appColors;
 }

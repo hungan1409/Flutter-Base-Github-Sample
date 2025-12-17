@@ -8,20 +8,19 @@ enum Flavor { development, production }
 
 @immutable
 class Constants {
-  const Constants._({
-    required this.endpoint,
-    required this.apiKey,
-  });
+  const Constants._({required this.endpoint, required this.apiKey});
 
   factory Constants.of() {
-    final flavor =
-        EnumToString.fromString(Flavor.values, AppConfig.flavorEnvironment);
+    final flavor = EnumToString.fromString(
+      Flavor.values,
+      AppConfig.flavorEnvironment,
+    );
 
     switch (flavor) {
       case Flavor.development:
         return Constants._dev();
       case Flavor.production:
-      default:
+      case null:
         return Constants._prd();
     }
   }
@@ -40,19 +39,20 @@ class Constants {
     );
   }
 
-  static late final Constants instance = Constants.of();
+  static final Constants instance = Constants.of();
 
   final String endpoint;
   final String apiKey;
 
   static final Map<String, String> supportedLanguages = {
     'en': 'English',
-    'ja': "日本語"
+    'ja': '日本語',
   };
 
-  static const getFlavor = "GET_FLAVOR";
-  static const platformChannel =
-      MethodChannel("com.flutter.base.sample/native_channel");
+  static const getFlavor = 'GET_FLAVOR';
+  static const platformChannel = MethodChannel(
+    'com.flutter.base.sample/native_channel',
+  );
 
-  static const iOSAppId = "915061235"; //temporary id
+  static const iOSAppId = '915061235'; //temporary id
 }

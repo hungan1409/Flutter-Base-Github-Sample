@@ -6,8 +6,14 @@
   "repositories": "Repositories",
   "noResult": "No item found!",
   "lastUpdate": "Last updated at ",
-  "setting": "Setting",
+  "setting": "Settings",
   "language": "Language",
-  "force_update_title": "UPDATE NEW VERSION",
-  "force_update_content": "A new version of this app is available now!"
+  "talkerLog": "Talker Log",
+  "forceUpdateTitle": "UPDATE NEW VERSION",
+  "forceUpdateContent": "A new version of this app is available now!",
+  "searchGithubUsers": "Search GitHub Users",
+  "searchGithubUsersHint": "Enter a username to explore their repositories",
+  "allRepositoriesLoaded": "All repositories loaded",
+  "githubExplorer": "GitHub Explorer",
+  "errorOccurred": "Error Occurred"
 }

@@ -5,7 +5,7 @@ class AppPreferences {
 
   static SharedPreferences get instance => _pref;
 
-  static init() async {
+  static Future<void> init() async {
     _pref = await SharedPreferences.getInstance();
   }
 }

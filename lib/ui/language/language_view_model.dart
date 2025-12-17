@@ -5,8 +5,12 @@ import 'package:app/foundation/keys.dart';
 import 'package:app/provider/shared_preference_provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final languageViewModelProvider = ChangeNotifierProvider((ref) => LanguageViewModel(ref));
+final ChangeNotifierProvider<LanguageViewModel> languageViewModelProvider = ChangeNotifierProvider(
+  (ref) => LanguageViewModel(ref),
+);
 
 class LanguageViewModel extends ChangeNotifier {
   LanguageViewModel(this._ref);
@@ -14,26 +18,28 @@ class LanguageViewModel extends ChangeNotifier {
   final Ref _ref;
 
   // Change Locale
-  late Locale _currentLocale = Locale(_prefs.getString(Keys.currentLocale) ?? getLanguageInFirstTime());
+  late Locale _currentLocale = Locale(
+    _prefs.getString(Keys.currentLocale) ?? getLanguageInFirstTime(),
+  );
 
   Locale get currentLocale => _currentLocale;
 
-  late final _prefs = _ref.read(prefsProvider);
+  late final SharedPreferences _prefs = _ref.read(prefsProvider);
 
-  changeLocale(Locale locale) {
+  void changeLocale(Locale locale) {
     _prefs.setString(Keys.currentLocale, locale.languageCode);
     _currentLocale = locale;
     notifyListeners();
   }
 
   String getLanguageInFirstTime() {
-    String currentLocale = Platform.localeName.substring(0, 2);
+    final String currentLocale = Platform.localeName.substring(0, 2);
     if (Constants.supportedLanguages.containsKey(currentLocale)) {
       _prefs.setString(Keys.currentLocale, currentLocale);
       return currentLocale;
     } else {
-      _prefs.setString(Keys.currentLocale, "en");
-      return "en";
+      _prefs.setString(Keys.currentLocale, 'en');
+      return 'en';
     }
   }
 }

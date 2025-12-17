@@ -45,15 +45,9 @@ extension WidgetExtension on Widget {
     );
   }
 
-  Widget paddingVH({
-    required double vertical,
-    required double horizontal,
-  }) {
+  Widget paddingVH({required double vertical, required double horizontal}) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: vertical,
-        horizontal: horizontal,
-      ),
+      padding: EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
       child: this,
     );
   }
@@ -120,15 +114,9 @@ extension WidgetExtension on Widget {
     );
   }
 
-  Widget marginVH({
-    required double vertical,
-    required double horizontal,
-  }) {
+  Widget marginVH({required double vertical, required double horizontal}) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        vertical: vertical,
-        horizontal: horizontal,
-      ),
+      margin: EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
       child: this,
     );
   }
@@ -149,5 +137,6 @@ extension WidgetExtension on Widget {
       child: this,
     );
   }
+
   //endregion
 }

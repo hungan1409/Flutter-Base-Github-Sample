@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScaleEffect extends StatefulWidget {
-  const ScaleEffect({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const ScaleEffect({super.key, required this.child});
 
   final Widget child;
 
@@ -12,8 +9,7 @@ class ScaleEffect extends StatefulWidget {
   State<ScaleEffect> createState() => _ScaleEffectState();
 }
 
-class _ScaleEffectState extends State<ScaleEffect>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _ScaleEffectState extends State<ScaleEffect> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scaleAnimation;
 
@@ -26,10 +22,7 @@ class _ScaleEffectState extends State<ScaleEffect>
     )..forward();
 
     _scaleAnimation = Tween<double>(begin: 0.6, end: 1).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
   }
 
@@ -42,10 +35,7 @@ class _ScaleEffectState extends State<ScaleEffect>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ScaleTransition(
-      scale: _scaleAnimation,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _scaleAnimation, child: widget.child);
   }
 
   @override

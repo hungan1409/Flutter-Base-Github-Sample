@@ -1,13 +1,17 @@
 import 'package:app/data/handler/app_error.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 
-void handleError(BuildContext context, AppError appError, [VoidCallback? callback]) {
+void handleError(
+  BuildContext context,
+  AppError appError, [
+  VoidCallback? callback,
+]) {
   final l10n = L10n.of(context)!;
-  String message = parseError(context, appError);
+  final String message = parseError(context, appError);
 
-  showDialog(
+  showDialog<void>(
     context: context,
     builder: (context) {
       return CupertinoAlertDialog(
@@ -24,7 +28,7 @@ void handleError(BuildContext context, AppError appError, [VoidCallback? callbac
               }
             },
             child: Text(l10n.ok),
-          )
+          ),
         ],
       );
     },
@@ -33,7 +37,7 @@ void handleError(BuildContext context, AppError appError, [VoidCallback? callbac
 
 String parseError(BuildContext context, AppError appError) {
   // Get default message from server
-  String errorMessage = appError.message;
+  final String errorMessage = appError.message;
 
   // Check specific case for use message from app
   switch (appError.type) {
@@ -50,6 +54,12 @@ String parseError(BuildContext context, AppError appError) {
     case AppErrorType.server:
       break;
     case AppErrorType.unknown:
+      break;
+    case AppErrorType.common:
+      break;
+    case AppErrorType.forceUpdate:
+      break;
+    case AppErrorType.maintenanceMode:
       break;
   }
 

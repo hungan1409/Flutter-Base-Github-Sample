@@ -1,4 +1,4 @@
 import 'package:app/data/handler/error_handler.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
 
-final errorProvider = ChangeNotifierProvider((ref) => ErrorHandler());
+final ChangeNotifierProvider<ErrorHandler> errorProvider = ChangeNotifierProvider((ref) => ErrorHandler());

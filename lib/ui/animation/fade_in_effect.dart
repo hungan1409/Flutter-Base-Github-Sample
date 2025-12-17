@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class FadeInEffect extends StatefulWidget {
   const FadeInEffect({
-    Key? key,
+    super.key,
     required this.child,
     this.intervalStart = 0,
     this.keepAlive = false,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final double intervalStart;
@@ -46,10 +46,7 @@ class _FadeInEffectState extends State<FadeInEffect>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return FadeTransition(
-      opacity: opacityAnimation,
-      child: widget.child,
-    );
+    return FadeTransition(opacity: opacityAnimation, child: widget.child);
   }
 
   @override

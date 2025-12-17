@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SlideEffect extends StatefulWidget {
-  const SlideEffect({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const SlideEffect({super.key, required this.child});
 
   final Widget child;
 
@@ -12,8 +9,7 @@ class SlideEffect extends StatefulWidget {
   State<SlideEffect> createState() => _SlideEffectState();
 }
 
-class _SlideEffectState extends State<SlideEffect>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _SlideEffectState extends State<SlideEffect> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final AnimationController _animationController;
   late final Animation<Offset> _slideAnimation;
 
@@ -26,10 +22,7 @@ class _SlideEffectState extends State<SlideEffect>
     )..forward();
 
     _slideAnimation = Tween<Offset>(begin: const Offset(0.25, 0.0), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOut,
-      ),
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
     );
   }
 
@@ -42,10 +35,7 @@ class _SlideEffectState extends State<SlideEffect>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SlideTransition(
-      position: _slideAnimation,
-      child: widget.child,
-    );
+    return SlideTransition(position: _slideAnimation, child: widget.child);
   }
 
   @override

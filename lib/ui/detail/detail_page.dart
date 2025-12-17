@@ -7,7 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 @RoutePage()
 class DetailPage extends HookConsumerWidget {
-  const DetailPage({Key? key, required this.repos}) : super(key: key);
+  const DetailPage({super.key, required this.repos});
 
   final Repos repos;
 
@@ -16,23 +16,24 @@ class DetailPage extends HookConsumerWidget {
     final router = useRouter();
 
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              router.popForced();
-            },
-          ),
-          title: Text(repos.fullName.toString()),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            router.pop();
+          },
         ),
-        body: SafeArea(
-          child: WebViewWidget(
-            controller: WebViewController()
-              ..setJavaScriptMode(JavaScriptMode.unrestricted)
-              ..loadRequest(Uri.parse(repos.htmlUrl ?? '')),
-          ),
-        ));
+        title: Text(repos.fullName.toString()),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: WebViewWidget(
+          controller: WebViewController()
+            ..setJavaScriptMode(JavaScriptMode.unrestricted)
+            ..loadRequest(Uri.parse(repos.htmlUrl ?? '')),
+        ),
+      ),
+    );
   }
 }

@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -12,18 +13,12 @@ part of 'app_router.dart';
 /// generated route for
 /// [DetailPage]
 class DetailRoute extends PageRouteInfo<DetailRouteArgs> {
-  DetailRoute({
-    Key? key,
-    required Repos repos,
-    List<PageRouteInfo>? children,
-  }) : super(
-          DetailRoute.name,
-          args: DetailRouteArgs(
-            key: key,
-            repos: repos,
-          ),
-          initialChildren: children,
-        );
+  DetailRoute({Key? key, required Repos repos, List<PageRouteInfo>? children})
+    : super(
+        DetailRoute.name,
+        args: DetailRouteArgs(key: key, repos: repos),
+        initialChildren: children,
+      );
 
   static const String name = 'DetailRoute';
 
@@ -31,19 +26,13 @@ class DetailRoute extends PageRouteInfo<DetailRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<DetailRouteArgs>();
-      return DetailPage(
-        key: args.key,
-        repos: args.repos,
-      );
+      return DetailPage(key: args.key, repos: args.repos);
     },
   );
 }
 
 class DetailRouteArgs {
-  const DetailRouteArgs({
-    this.key,
-    required this.repos,
-  });
+  const DetailRouteArgs({this.key, required this.repos});
 
   final Key? key;
 
@@ -53,16 +42,23 @@ class DetailRouteArgs {
   String toString() {
     return 'DetailRouteArgs{key: $key, repos: $repos}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DetailRouteArgs) return false;
+    return key == other.key && repos == other.repos;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ repos.hashCode;
 }
 
 /// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
+    : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
@@ -78,10 +74,7 @@ class HomeRoute extends PageRouteInfo<void> {
 /// [LanguagePage]
 class LanguageRoute extends PageRouteInfo<void> {
   const LanguageRoute({List<PageRouteInfo>? children})
-      : super(
-          LanguageRoute.name,
-          initialChildren: children,
-        );
+    : super(LanguageRoute.name, initialChildren: children);
 
   static const String name = 'LanguageRoute';
 
@@ -97,10 +90,7 @@ class LanguageRoute extends PageRouteInfo<void> {
 /// [SettingPage]
 class SettingRoute extends PageRouteInfo<void> {
   const SettingRoute({List<PageRouteInfo>? children})
-      : super(
-          SettingRoute.name,
-          initialChildren: children,
-        );
+    : super(SettingRoute.name, initialChildren: children);
 
   static const String name = 'SettingRoute';
 
@@ -108,6 +98,22 @@ class SettingRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SettingPage();
+    },
+  );
+}
+
+/// generated route for
+/// [TalkerPage]
+class TalkerRoute extends PageRouteInfo<void> {
+  const TalkerRoute({List<PageRouteInfo>? children})
+    : super(TalkerRoute.name, initialChildren: children);
+
+  static const String name = 'TalkerRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TalkerPage();
     },
   );
 }

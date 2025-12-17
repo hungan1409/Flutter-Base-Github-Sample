@@ -6,27 +6,26 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ContainerErrorHandling extends HookConsumerWidget {
-  const ContainerErrorHandling({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const ContainerErrorHandling({super.key, required this.child});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _isDialogShowing = useState(false);
+    final isDialogShowing = useState(false);
 
     // Check and show error when call api
     final appError = ref.watch(errorProvider.select((value) => value.appError));
     if (appError != null) {
       Future.delayed(Duration.zero, () {
         // Prevent dialog show multi times
-        if (!_isDialogShowing.value) {
-          _isDialogShowing.value = true;
-          handleError(context, appError, () {
-            _isDialogShowing.value = false;
-          });
+        if (!isDialogShowing.value) {
+          isDialogShowing.value = true;
+          if (context.mounted) {
+            handleError(context, appError, () {
+              isDialogShowing.value = false;
+            });
+          }
         }
       });
       ref.read(errorProvider).resetError();

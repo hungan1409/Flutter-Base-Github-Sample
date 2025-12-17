@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-extension AsyncSnapshotExt on AsyncSnapshot {
+extension AsyncSnapshotExt on AsyncSnapshot<bool> {
   bool get isNothing => connectionState == ConnectionState.none;
 
   bool get isActive => connectionState == ConnectionState.active;

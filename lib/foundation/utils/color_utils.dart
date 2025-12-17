@@ -8,7 +8,7 @@ class ColorUtils {
     final hexDigits = hex.startsWith('#') ? hex.substring(1) : hex;
     final hexMask = hexDigits.length <= 6 ? 0xFF000000 : 0;
     final hexValue = int.parse(hexDigits, radix: 16);
-    assert(hexValue >= 0 && hexValue <= 0xFFFFFFFF);
+    assert(hexValue >= 0 && hexValue <= 0xFFFFFFFF, 'Invalid hex color: $hex');
     return hexValue | hexMask;
   }
 
@@ -19,7 +19,7 @@ class ColorUtils {
   /// and alpha/opacity value will be stripped.
   ///
   static String intToHex(int i) {
-    assert(i >= 0 && i <= 0xFFFFFFFF);
+    assert(i >= 0 && i <= 0xFFFFFFFF, 'Invalid int color: $i');
     return '#${(i & 0xFFFFFF | 0x1000000).toRadixString(16).substring(1).toUpperCase()}';
   }
 }

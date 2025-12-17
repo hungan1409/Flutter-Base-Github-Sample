@@ -1,11 +1,9 @@
-import 'package:app/foundation/constants.dart';
-import 'package:app/foundation/extension/widget_extension.dart';
+import 'package:app/foundation/app_config.dart';
+import 'package:app/route/app_router.dart';
 import 'package:app/ui/hook/use_l10n.dart';
 import 'package:app/ui/hook/use_router.dart';
-import 'package:app/ui/language/language_view_model.dart';
 import 'package:app/ui/theme/app_colors.dart';
-import 'package:app/ui/theme/app_theme.dart';
-import 'package:app/ui/theme/font_size.dart';
+import 'package:app/ui/theme/app_text_theme.dart';
 import 'package:app/ui/theme/layout_size.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -13,83 +11,111 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class SettingPage extends HookConsumerWidget {
-  const SettingPage({Key? key}) : super(key: key);
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
     final router = useRouter();
-    final appColors = ref.read(appThemeProvider).appColors;
-    final viewModel = ref.watch(languageViewModelProvider);
+    final appColors = context.appColors;
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            router.popForced();
-          },
+          icon: const Icon(Icons.arrow_back_ios_rounded),
+          onPressed: () => router.pop(),
         ),
         title: Text(l10n.setting),
-        automaticallyImplyLeading: false,
         centerTitle: true,
       ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) => Divider(
-            color: appColors.border, height: 0, indent: LayoutSize.sizePadding20, endIndent: LayoutSize.sizePadding20),
-        itemCount: Constants.supportedLanguages.length + 1,
-        itemBuilder: (context, index) {
-          if (index == Constants.supportedLanguages.length) {
-            return Container();
-          }
-          final locale = Constants.supportedLanguages.keys.elementAt(index);
-          final name = Constants.supportedLanguages[locale]!;
-          final isChecked = viewModel.currentLocale.languageCode == locale ? true : false;
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          vertical: LayoutSize.sizePaddingMedium,
+        ),
+        children: [
+          // Language Setting
+          _SettingItem(
+            icon: Icons.language_rounded,
+            title: l10n.language,
+            onTap: () => router.push(const LanguageRoute()),
+          ),
 
-          return InkWell(
-            onTap: () {
-              viewModel.changeLocale(Locale(locale));
-            },
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: LayoutSize.sizePadding20, vertical: LayoutSize.sizePadding16),
-              child: Row(
-                children: [
-                  _buildCheckBox(
-                    isChecked,
-                    appColors,
-                    (_) {
-                      viewModel.changeLocale(Locale(locale));
-                    },
-                  ),
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: FontSize.pt16),
-                  ).paddingOnly(left: LayoutSize.sizePadding16),
-                ],
-              ),
+          if (AppConfig.isShowLog()) ...[
+            Divider(
+              height: 1,
+              indent: LayoutSize.sizePadding16,
+              endIndent: LayoutSize.sizePadding16,
+              color: appColors.outline.withAlpha(50),
             ),
-          );
-        },
+
+            // Talker Log Setting
+            _SettingItem(
+              icon: Icons.bug_report_rounded,
+              title: l10n.talkerLog,
+              onTap: () => router.push(const TalkerRoute()),
+            ),
+          ],
+        ],
       ),
     );
   }
+}
 
-  Widget _buildCheckBox(bool isChecked, AppColors appColors, ValueChanged<bool?> onChanged) {
-    return Container(
-      padding: EdgeInsets.zero,
-      width: LayoutSize.sizeBoxLarge,
-      height: LayoutSize.sizeBoxLarge,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(LayoutSize.borderRadius4),
-          border: Border.all(width: LayoutSize.borderSize1, color: isChecked ? appColors.primary : appColors.icon)),
-      child: Checkbox(
-        value: isChecked,
-        tristate: false,
-        onChanged: onChanged,
-        activeColor: Colors.transparent,
-        checkColor: appColors.primary,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(LayoutSize.borderRadius4)),
+class _SettingItem extends StatelessWidget {
+  const _SettingItem({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final appColors = context.appColors;
+    final appTextTheme = context.appTextTheme;
+
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: LayoutSize.sizePadding16,
+          vertical: LayoutSize.sizePadding14,
+        ),
+        child: Row(
+          children: [
+            // Icon
+            Container(
+              padding: const EdgeInsets.all(LayoutSize.sizeBoxSmall),
+              decoration: BoxDecoration(
+                color: appColors.primary.withAlpha(25),
+                borderRadius: BorderRadius.circular(LayoutSize.borderRadius10),
+              ),
+              child: Icon(
+                icon,
+                size: LayoutSize.iconSize24,
+                color: appColors.primary,
+              ),
+            ),
+            const SizedBox(width: LayoutSize.sizePadding16),
+
+            // Title
+            Expanded(
+              child: Text(
+                title,
+                style: appTextTheme.s16.medium(),
+              ),
+            ),
+
+            // Trailing arrow
+            Icon(
+              Icons.chevron_right_rounded,
+              color: appColors.outline,
+            ),
+          ],
+        ),
       ),
     );
   }

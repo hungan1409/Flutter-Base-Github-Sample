@@ -23,7 +23,10 @@ class Result<T> with _$Result<T> {
     }
   }
 
-  static Future<Result<T>> guardFuture<T>(Future<T> Function() future, ErrorHandler errorHandler) async {
+  static Future<Result<T>> guardFuture<T>(
+    Future<T> Function() future,
+    ErrorHandler errorHandler,
+  ) async {
     try {
       return Result.success(data: await future());
     } on Exception catch (e) {
@@ -37,7 +40,7 @@ class Result<T> with _$Result<T> {
 
   bool get isFailure => !isSuccess;
 
-  void ifSuccess(Function(T data) body) {
+  void ifSuccess(void Function(T data) body) {
     maybeWhen(
       success: (data) => body(data),
       orElse: () {
@@ -46,7 +49,7 @@ class Result<T> with _$Result<T> {
     );
   }
 
-  void ifFailure(Function(AppError e) body) {
+  void ifFailure(void Function(AppError e) body) {
     maybeWhen(
       failure: (e) => body(e),
       orElse: () {
@@ -56,10 +59,7 @@ class Result<T> with _$Result<T> {
   }
 
   T get dataOrThrow {
-    return when(
-      success: (data) => data,
-      failure: (e) => throw e,
-    );
+    return when(success: (data) => data, failure: (e) => throw e);
   }
 }
 
