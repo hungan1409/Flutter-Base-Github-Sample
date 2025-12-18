@@ -5,9 +5,20 @@ A Flutter sample project demonstrating clean architecture with MVVM pattern, Riv
 ## UI Sample
 [Get data](https://github.com/user-attachments/assets/99913795-bbff-4edb-91a5-49459b698817)
 
-[Change language](https://github.com/user-attachments/assets/063a164c-f6eb-4e32-9ccf-dec83770e8e4)
+### Search Repos UI
+<img width="603" height="1311" alt="Simulator Screenshot - iPhone 16 Pro - 2025-12-18 at 11 24 47" src="https://github.com/user-attachments/assets/901f0f0b-687b-4148-b80b-2930c1984544" />
 
-[View log directly](https://github.com/user-attachments/assets/67b3a4fe-e0d4-4c41-8370-d38d52671bca)
+### Setting UI
+<img width="603" height="1311" alt="Simulator Screenshot - iPhone 16 Pro - 2025-12-18 at 11 24 54" src="https://github.com/user-attachments/assets/c036f9b4-fedd-4d3b-8821-8ba23fc50cdc" />
+
+### Change language UI
+<img width="603" height="1311" alt="Simulator Screenshot - iPhone 16 Pro - 2025-12-18 at 11 24 57" src="https://github.com/user-attachments/assets/df4c1eda-385c-4ac1-be8f-4a11fa688349" />
+
+### Talker UI
+<img width="603" height="1311" alt="Simulator Screenshot - iPhone 16 Pro - 2025-12-18 at 11 25 07" src="https://github.com/user-attachments/assets/b91fcae2-2c73-42e7-ab6d-dfbfc61cbccd" />
+
+### Export log talker
+<img width="603" height="1311" alt="Simulator Screenshot - iPhone 16 Pro - 2025-12-18 at 11 25 19" src="https://github.com/user-attachments/assets/fb2d11ed-7dfb-4d65-ad70-ca9853117e7f" />
 
 ## Requirements
 
