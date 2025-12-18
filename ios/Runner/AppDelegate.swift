@@ -1,7 +1,7 @@
 import UIKit
 import Flutter
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
   let platformChannel = "com.flutter.base.sample/native_channel"
   let getFlavor = "GET_FLAVOR"
