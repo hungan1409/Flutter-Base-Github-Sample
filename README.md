@@ -22,14 +22,14 @@ A Flutter sample project demonstrating clean architecture with MVVM pattern, Riv
 
 ## Requirements
 
-- Dart SDK: ^3.8.0
+- Dart SDK: 3.10.0
 - Flutter: 3.38.0
 - [npm (for git hooks)](https://treehouse.github.io/installation-guides/mac/node-mac.html)
 
 ## Environment
 
 **iOS**
-- iOS 13+
+- iOS 15.6+
 
 **Android**
 - Android 5.1+
